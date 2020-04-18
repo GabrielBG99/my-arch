@@ -8,8 +8,8 @@ reflector --verbose --country Brazil -l 10 \
 	--sort rate --save /etc/pacman.d/mirrorlist
 
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
-	dosfstools mtools grub-efi-x86_64 efibootmgr i3 xorg-server xorg-xinit \
-	slock xdm ttf-dejavu noto-fonts-cjk noto-fonts-emoji noto-fonts firefox \
+	dosfstools mtools grub-efi-x86_64 efibootmgr spectrwm xorg-server xorg-xinit \
+	slock ttf-dejavu noto-fonts-cjk noto-fonts-emoji noto-fonts firefox \
 	alacritty picom scrot openssh git feh
 
 # NVIDIA drivers
@@ -29,7 +29,6 @@ cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager
-systemctl enable xdm
 
 echo "Enter a password for root"
 passwd
@@ -52,9 +51,9 @@ fi
 
 cp -r ./config /home/$PERSONAL_USER/.config
 
-cat ./bash_files/bashrc > /home/$PERSONAL_USER/.bachrc
+cp ./dot_files /home/$PERSONAL_USER
 
-echo "startx" > /home/$PERSONAL_USER/.xsession
+cat ./bash_files/bashrc > /home/$PERSONAL_USER/.bachrc
 
 chown -R $PERSONAL_USER:users /home/$PERSONAL_USER/
 
