@@ -8,7 +8,7 @@ reflector --verbose --country Brazil -l 10 \
 	--sort rate --save /etc/pacman.d/mirrorlist
 
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
-	dosfstools mtools grub-efi-x86_64 efibootmgr spectrwm xorg-server xorg-xinit \
+	dosfstools mtools grub-efi-x86_64 efibootmgr qtile xorg-server xorg-xinit \
 	slock ttf-dejavu noto-fonts-cjk noto-fonts-emoji noto-fonts firefox \
 	alacritty picom scrot openssh git feh
 
@@ -34,7 +34,7 @@ echo "Enter a password for root"
 passwd
 
 useradd -m -g users -G wheel $PERSONAL_USER
-echo "Enter a password $PERSONAL_USER"
+echo "Enter a password for $PERSONAL_USER"
 passwd $PERSONAL_USER
 
 cat /etc/sudoers > ./sudoers
@@ -49,9 +49,7 @@ if [ -d /home/$PERSONAL_USER/.config ]; then
 	rm -rf /home/$PERSONAL_USER/.config
 fi
 
-cp -r ./config /home/$PERSONAL_USER/.config
-
-cp ./dot_files /home/$PERSONAL_USER
+cp -r ./config/* /home/$PERSONAL_USER/.config
 
 cat ./bash_files/bashrc > /home/$PERSONAL_USER/.bachrc
 
