@@ -10,7 +10,7 @@ reflector --verbose --country Brazil -l 10 \
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
 	dosfstools mtools grub-efi-x86_64 efibootmgr qtile xorg-server xorg-xinit \
 	slock ttf-dejavu noto-fonts-cjk noto-fonts-emoji noto-fonts firefox \
-	alacritty picom scrot openssh git feh
+	alacritty picom scrot openssh git feh python python-pip python-psutil
 
 # NVIDIA drivers
 pacman -S --noconfirm nvidia
@@ -20,9 +20,7 @@ cp ./X11_files/20-keyboard.conf /etc/X11/xorg.conf.d/
 grub-install --target=x86_64-efi --efi-directory=/boot/efi \
 	--bootloader-id="Arch Linux GRUB" --recheck
 
-if [ ! -d /boot/grub/locale ]; then
-	mkdir /boot/grub/locale
-fi
+mkdir -p /boot/grub/locale
 
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 
