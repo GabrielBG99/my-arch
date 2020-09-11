@@ -66,7 +66,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 
     # Custom keybindings
-    Key([mod], 'f', lazy.spawn('firefox')),
+    Key([mod], 'f', lazy.spawn('google-chrome-stable')),
     Key([mod], 'Delete', lazy.spawn('slock')),
     Key([], 'XF86AudioRaiseVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +5%')),
     Key([], 'XF86AudioLowerVolume', lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -5%')),
@@ -88,7 +88,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='sans',
+    font='monospace',
     fontsize=10,
     padding=2,
 )
@@ -103,8 +103,9 @@ my_widgets = [
     IPAddress(),
     widget.TextBox(text='|'),
     widget.CPU(format='CPU {load_percent}%'),
-    widget.TextBox(text='| Vol.'),
-    widget.Volume(),
+    widget.TextBox(text='|'),
+    widget.TextBox(text='Vol.'),
+    widget.PulseVolume(),
     widget.TextBox(text='|'),
     widget.Clock(format='%A, %m/%d/%Y - %H:%M:%S'),
 ]

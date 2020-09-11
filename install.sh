@@ -3,14 +3,16 @@
 # Your personal user
 PERSONAL_USER="gabriel"
 
-pacman -S --noconfirm reflactor
-reflector --verbose --country Brazil -l 10 \
-	--sort rate --save /etc/pacman.d/mirrorlist
+pacman -S --noconfirm reflector
+reflector --verbose --country Brazil -l 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
-	dosfstools mtools grub-efi-x86_64 efibootmgr qtile xorg-server xorg-xinit \
-	slock ttf-dejavu noto-fonts-cjk noto-fonts-emoji noto-fonts firefox \
-	alacritty picom scrot openssh git feh python python-pip python-psutil
+	dosfstools mtools grub-efi-x86_64 efibootmgr qtile \
+	slock noto-fonts alacritty picom scrot openssh git \
+	feh python python-pip
+
+pip install -U pip
+pip install -U netifaces psutil
 
 # NVIDIA drivers
 pacman -S --noconfirm nvidia
@@ -49,7 +51,7 @@ fi
 
 cp -r ./config/* /home/$PERSONAL_USER/.config
 
-cat ./bash_files/bashrc > /home/$PERSONAL_USER/.bachrc
+cat ./bash_files/bashrc > /home/$PERSONAL_USER/.bashrc
 
 chown -R $PERSONAL_USER:users /home/$PERSONAL_USER/
 

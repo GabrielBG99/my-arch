@@ -1,5 +1,13 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
+# Import additional configuration files
+#
+# These configuration files will be loaded in order, replacing values in files
+# loaded earlier with those loaded later in the chain. The file itself will
+# always be loaded last.
+#import:
+#  - /path/to/alacritty.yml
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -49,7 +57,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  #decorations: full
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -60,13 +68,13 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  #startup_mode: Windowed
+  startup_mode: Windowed
 
   # Window title
   title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  #dynamic_title: true
+  dynamic_title: true
 
   # Window class (Linux/BSD only):
   class:
@@ -157,12 +165,12 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  #use_thin_strokes: true
+  # use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
+#draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night)
+# Colors (Dracula)
 colors:
   # Default colors
   primary:
@@ -179,47 +187,20 @@ colors:
 
   # Cursor colors
   #
-  # Colors which should be used to draw the terminal cursor.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
   cursor:
     text: '0x44475a'
     cursor: '0xf8f8f2'
 
-  # Vi mode cursor colors
-  #
-  # Colors for the cursor when the vi mode is active.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #vi_mode_cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
-
   # Selection colors
   #
-  # Colors which should be used to draw the selection area.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #selection:
-  #  text: CellBackground
-  #  background: CellForeground
-
-  # Search colors
-  #
-  # Colors used for the search bar and match highlighting.
-  #search:
-    # Allowed values are CellForeground and CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
+  # If only text is unset the cell text color will remain the same.
+  selection:
+    text: '0xf8f8f2'
+    background: '0x44475a'
 
   # Normal colors
   normal:
@@ -263,7 +244,7 @@ colors:
   # When these are not set, they're filled with sensible defaults.
   #
   # Example:
-  #   `- { index: 16, color: '#ff00ff' }`
+  #   `- { index: 16, color: '0xff00ff' }`
   #
   indexed_colors: []
 
@@ -316,7 +297,7 @@ background_opacity: 1.0
 
 selection:
   # This string contains all characters that are used as separators for "semantic words" in Alacritty.
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
@@ -377,7 +358,7 @@ working_directory: None
 #
 # Setting this option to `true` makes Alacritty use the legacy WinPTY backend,
 # even if the ConPTY backend is available.
-winpty_backend: false
+#winpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
 #alt_send_esc: true
@@ -392,7 +373,7 @@ mouse:
   triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  hide_when_typing: false
+  #hide_when_typing: false
 
   url:
     # URL launcher
@@ -407,7 +388,7 @@ mouse:
     #   - (Linux/BSD) xdg-open
     #   - (Windows) explorer
     launcher:
-     program: firefox
+     program: google-chrome-stable
      args: []
 
     # URL modifiers
@@ -521,7 +502,7 @@ mouse_bindings:
 #   - Up
 #       Move the vi mode cursor up by one line.
 #   - Down
-#       Move the vi mode cursor down by one linee.
+#       Move the vi mode cursor down by one line.
 #   - Left
 #       Move the vi mode cursor left by one character.
 #   - Right
@@ -610,6 +591,7 @@ mouse_bindings:
 #    - AppCursor
 #    - AppKeypad
 #    - Alt
+#    - Vi
 #
 #    A `~` operator can be used before a mode to apply the binding whenever
 #    the mode is *not* active, e.g. `~Alt`.
@@ -637,6 +619,7 @@ mouse_bindings:
   #- { key: Escape,                      mode: Vi, action: ClearSelection          }
   #- { key: I,                           mode: Vi, action: ScrollToBottom          }
   #- { key: I,                           mode: Vi, action: ToggleViMode            }
+  #- { key: C,      mods: Control,       mode: Vi, action: ToggleViMode            }
   #- { key: Y,      mods: Control,       mode: Vi, action: ScrollLineUp            }
   #- { key: E,      mods: Control,       mode: Vi, action: ScrollLineDown          }
   #- { key: G,                           mode: Vi, action: ScrollToTop             }
