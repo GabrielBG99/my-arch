@@ -9,10 +9,7 @@ reflector --verbose --country Brazil -l 10 --sort rate --save /etc/pacman.d/mirr
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
 	dosfstools mtools grub-efi-x86_64 efibootmgr qtile \
 	slock noto-fonts alacritty picom scrot openssh git \
-	feh python python-pip
-
-pip install -U pip
-pip install -U netifaces psutil
+	feh python python-pip python-netifaces python-psutil
 
 # NVIDIA drivers
 pacman -S --noconfirm nvidia
@@ -48,6 +45,8 @@ cp -r ./Images /home/$PERSONAL_USER/
 if [ -d /home/$PERSONAL_USER/.config ]; then
 	rm -rf /home/$PERSONAL_USER/.config
 fi
+
+mkdir -p /home/$PERSONAL_USER/.config
 
 cp -r ./config/* /home/$PERSONAL_USER/.config
 

@@ -105,7 +105,7 @@ my_widgets = [
     widget.CPU(format='CPU {load_percent}%'),
     widget.TextBox(text='|'),
     widget.TextBox(text='Vol.'),
-    widget.PulseVolume(),
+    widget.Volume(),
     widget.TextBox(text='|'),
     widget.Clock(format='%A, %m/%d/%Y - %H:%M:%S'),
 ]
