@@ -7,9 +7,12 @@ pacman -S --noconfirm reflector
 reflector --verbose --country Brazil -l 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 pacman -S --noconfirm networkmanager sudo pulseaudio zip unzip wget curl vim \
-	dosfstools mtools grub-efi-x86_64 efibootmgr qtile \
-	slock noto-fonts alacritty picom scrot openssh git \
-	feh python python-pip python-netifaces python-psutil
+	dosfstools mtools grub-efi-x86_64 efibootmgr qtile alsa-utils \
+	slock noto-fonts alacritty picom scrot openssh git go \
+	feh python python-pip python-netifaces python-psutil pavucontrol \
+	docker
+
+systemctl enable docker.service
 
 # NVIDIA drivers
 pacman -S --noconfirm nvidia
