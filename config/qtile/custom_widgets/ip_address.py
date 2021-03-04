@@ -1,32 +1,27 @@
-from netifaces import interfaces, ifaddresses, AF_INET
+import socket
 from libqtile.widget import base
 
 
-class IPAddress(base.ThreadedPollText):
+class IPAddress(base.ThreadPoolText):
+    DEFAULT_IP = '127.0.0.1'
+
     orientations = base.ORIENTATION_HORIZONTAL
 
     defaults = [
-        ("update_interval", 1.0, "Update interval for the IPAddress widget"),
+        ('update_interval', 1.0, 'Update interval for the IPAddress widget'),
     ]
 
     def __init__(self, **config):
-        super().__init__(**config)
+        super().__init__(text=IPAddress.DEFAULT_IP, **config)
         self.add_defaults(IPAddress.defaults)
 
-    def tick(self):
-        self.update(self.poll())
-        return self.update_interval
-
     def poll(self):
-        ip_address = '127.0.0.1'
-        for iface_name in interfaces():
-            ip = [
-                i['addr'] for i in ifaddresses(iface_name).setdefault(
-                    AF_INET, 
-                    [{'addr':'No IP addr'}]
-                )
-            ]
-            if ip[0].startswith('192'):
-                ip_address = ip[0]
-                break
-        return f'{ip_address}'
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.connect(('8.8.8.8', 80))
+                return str(sock.getsockname()[0])
+        except socket.error:
+            try:
+                return socket.gethostbyname(socket.gethostname())
+            except socket.gaierror:
+                return IPAddress.DEFAULT_IP
