@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Your personal user
 PERSONAL_USER="gabriel"
 
